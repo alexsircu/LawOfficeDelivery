@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace LawOfficeDelivery.Interface
 {
-    internal interface IOrderDeliveryFactory
+    internal interface IProviderFactory
     {
+        void Order();
     }
 }

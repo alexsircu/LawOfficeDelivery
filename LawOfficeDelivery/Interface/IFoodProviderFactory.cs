@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace LawOfficeDelivery.Interface
 {
-    internal interface IOrderOfficeFactory
+    internal interface IFoodProviderFactory : IProviderFactory
     {
-        IOrderDeliveryFactory GetOrderOffice(char letter);
+        
     }
 }

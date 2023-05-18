@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LawOfficeDelivery.Interface
 {
-    internal interface IOrderProviderFactory
+    internal interface IProduct
     {
     }
 }

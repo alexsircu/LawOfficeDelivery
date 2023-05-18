@@ -13,58 +13,90 @@ namespace LawOfficeDelivery
         OfficeManager _officeManager;
         TranslationOffice _translationOffice;
         FoodDeliveryOffice _foodDeliveryOffice;
-        FoodProvider _foodProvider;
-        TranslationProvider _translationProvider;
+        FoodDelivery _foodDelivery;
+        TranslationDelivery _translationDelivery;
 
         public OfficeManager OfficeManagerProp { get => _officeManager; set => _officeManager = value; }
         public TranslationOffice TranslationOfficeProp { get => _translationOffice; set => _translationOffice = value; }
         public FoodDeliveryOffice FoodDeliveryOfficeProp { get => _foodDeliveryOffice; set => _foodDeliveryOffice = value; }
-        public FoodProvider FoodProvider { get => _foodProvider; set => _foodProvider = value; }
-        public TranslationProvider TranslationProvider { get => _translationProvider; set => _translationProvider = value; }
+        public FoodDelivery FoodDelivery { get => _foodDelivery; set => _foodDelivery = value; }
+        public TranslationDelivery TranslationDelivery { get => _translationDelivery; set => _translationDelivery = value; }
 
-        public LawOffice(FoodProvider foodProvider, TranslationProvider translationProvider) 
+        public LawOffice(FoodDelivery foodDelivery, TranslationDelivery translationDelivery) 
         {
-            OfficeManagerProp = new OfficeManager();
+            OfficeManagerProp = new OfficeManager(this);
             TranslationOfficeProp = new TranslationOffice();
             FoodDeliveryOfficeProp = new FoodDeliveryOffice();
-            AddFoodProvider(foodProvider);
-            AddTranslationProvider(translationProvider);
+            AddFoodDelivery(foodDelivery);
+            AddTranslationDelivery(translationDelivery);
         }
 
-        private void AddFoodProvider(FoodProvider foodProvider)
+        private void AddFoodDelivery(FoodDelivery foodDelivery)
         {
-            if (foodProvider is null) return;
-            FoodProvider = foodProvider;
+            if (foodDelivery is null) return;
+            FoodDelivery = foodDelivery;
         }
 
-        private void AddTranslationProvider(TranslationProvider translationProvider)
+        private void AddTranslationDelivery(TranslationDelivery translationDelivery)
         {
-            if (translationProvider is null) return;
-            TranslationProvider = translationProvider;
+            if (translationDelivery is null) return;
+            TranslationDelivery = translationDelivery;
         }
 
-        internal class OfficeManager : Person, IOrderOfficeFactory
+        #region OfficeManagerClass
+        internal class OfficeManager : Person, IOfficeFactory
         {
             LawOffice _office;
 
             public LawOffice Office { get => _office; set => _office = value; }
 
-            public IOrderDeliveryFactory GetOrderOffice(char letter)
+            public OfficeManager(LawOffice office)
+            {
+                Office = office;
+            }
+
+            public void Order(char letter)
+            {
+                IDeliveryFactory internalOffice = GetOffice(letter);
+                if (internalOffice is TranslationOffice)
+                {
+                    internalOffice.GetDelivery(Office.TranslationDelivery);
+                }
+                if (internalOffice is FoodDeliveryOffice)
+                {
+                    internalOffice.GetDelivery(Office.FoodDelivery);
+                }
+            }
+
+            public IDeliveryFactory GetOffice(char letter)
             {
                 if (letter == 'T') return Office.TranslationOfficeProp;
                 if (letter == 'C') return Office.FoodDeliveryOfficeProp;
                 return null;
             }
         }
+        #endregion
 
-        internal class TranslationOffice : IOrderDeliveryFactory
+        #region TranslationOfficeClass
+        internal class TranslationOffice : IDeliveryFactory
         {
-
+            public void GetDelivery(IProviderFactory delivery)
+            {
+                delivery.Order();
+                Console.WriteLine("Dentro GetDelivery come translation");
+            }
         }
+        #endregion
 
-        internal class FoodDeliveryOffice : IOrderDeliveryFactory
+        #region FoodDeliveryOfficeClass
+        internal class FoodDeliveryOffice : IDeliveryFactory
         {
-
+            public void GetDelivery(IProviderFactory delivery)
+            {
+                delivery.Order();
+                Console.WriteLine("Dentro GetDelivery come food");
+            }
         }
+        #endregion
     }
 }
