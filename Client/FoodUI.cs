@@ -13,13 +13,14 @@ namespace Client
 {
     public class FoodUI
     {
-        FoodServices foodServices;
+        FoodServices _foodServices;
         IReadOnlyList<FoodProductRequest> menu;
+        double _distance;
 
-        double distance = 2.0;  // 2 Km
-        public FoodUI(FoodServices FoodServices, double Distance)
+        public FoodUI(FoodServices foodServices, double distance)
         {
-            foodServices = FoodServices;
+            _foodServices = foodServices;
+            _distance = distance;
         }
         public void ShowStartOptions(ref char input)
         {
@@ -44,9 +45,9 @@ namespace Client
             if (input == 'Q')
                 return;
             else
-                foodServices.Start(ref input);
+                _foodServices.Start(ref input);
         }
-        public void ShowMenuTypes(ref char input)
+        private void ShowMenuTypes(ref char input)
         {
             int inputNumber;
 
@@ -71,16 +72,16 @@ namespace Client
             } while (inputNumber != 1 && inputNumber != 2 && inputNumber != 3);
 
 
-            foodServices.CreateProviderFactory(ref input);
+            _foodServices.CreateProviderFactory(ref input);
         }
-        public void ShowMenu(ref char input)// Show Menu with all items 
+        public void ShowMenu(ref char input) 
         {
 
             string MenuInput = null;
             Console.Clear();
-            getAllThresds();
+            GetAllThresds();
 
-            menu = foodServices.GetMenu();
+            menu = _foodServices.GetMenu();
 
             do
             {
@@ -91,7 +92,7 @@ namespace Client
 
                     Console.BackgroundColor = ConsoleColor.White;
                     Console.ForegroundColor = ConsoleColor.Black;
-                    Console.WriteLine($"Menu from {foodServices.FoodProvider.Name}:".ToUpper());
+                    Console.WriteLine($"Menu from {_foodServices.FoodProvider.Name}:".ToUpper());
                     Console.ResetColor();
 
                     Console.WriteLine("");
@@ -115,7 +116,7 @@ namespace Client
 
                     ShowTotPrice();
 
-                    Console.WriteLine("Type item number an press Enter");
+                    Console.WriteLine("Type item number and press Enter");
                     Console.WriteLine("Q. to quit | B. basket | S. Send order ");
                     Console.Write("INSERT CHOICE:  ");
 
@@ -142,7 +143,7 @@ namespace Client
         }
         public void ShowAmountBasket()
         {
-            decimal tot = foodServices.Basket.foodProductOrder.Sum(i => i.Price);
+            decimal tot = _foodServices.Basket.foodProductOrder.Sum(i => i.Price);
 
             Console.BackgroundColor = ConsoleColor.Yellow;
             Console.WriteLine("Totale ordini nel carrello ", tot);
@@ -152,7 +153,7 @@ namespace Client
         {
             Console.Clear();
 
-            var items = foodServices.Basket.foodProductOrder
+            var items = _foodServices.Basket.foodProductOrder
            .GroupBy(e => e.FoodCode)
            .ToDictionary(fp =>
            fp.Key,
@@ -212,7 +213,7 @@ namespace Client
             FoodProductRequest item = menu.Where(i => i.FoodCode == inputNumber).FirstOrDefault();
             if (item is not null)
             {
-                foodServices.AddToBasket(item);
+                _foodServices.AddToBasket(item);
                 return false;
             }
             else
@@ -232,19 +233,10 @@ namespace Client
         }
         public void Start(ref char input)
         {
-            foodServices.Start(ref input);
+            _foodServices.Start(ref input);
             ShowMenuTypes(ref input);
-            //  foodServices.CreateProviderFactory(ref input);
-
-            if (input == 'Q')
-                return;
-
-            //  ShowMenuTypes(ref input);
-
-            if (input == 'Q')
-                return;
-
-            foodServices.GetProvider(distance);
+            if (input == 'Q') return;
+            _foodServices.GetProvider(_distance);
 
         }
         public async Task<char> SendOrder(Action<string, Order> FeedBack)
@@ -256,7 +248,7 @@ namespace Client
                 Console.WriteLine("Sending Order... ");
                 await Task.Delay(2000);
 
-                OrderResponse response = await foodServices.SendOrder();
+                OrderResponse response = await _foodServices.SendOrder();
                 if (response.Order is not null)
                 {
 
@@ -282,7 +274,7 @@ namespace Client
         }
         public void ShowTotPrice()
         {
-            decimal tot = foodServices.Basket.foodProductOrder.Sum(i => i.Price);
+            decimal tot = _foodServices.Basket.foodProductOrder.Sum(i => i.Price);
 
             Console.BackgroundColor = ConsoleColor.Red;
             Console.ForegroundColor = ConsoleColor.Black;
@@ -308,7 +300,7 @@ namespace Client
 
             Thread.Sleep(2000);
         }
-        public static void getAllThresds()
+        public static void GetAllThresds()
         {
             Console.WriteLine("---------------------------------------------------------------");
             Console.WriteLine("ThreadPool PendingWorkItemCount:");
@@ -330,7 +322,5 @@ namespace Client
 
 
         }
-
-
     }
 }

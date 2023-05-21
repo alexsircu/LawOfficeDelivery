@@ -6,4 +6,8 @@
     <CheckEolTargetFramework>false</CheckEolTargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CommonBE\CommonBE.csproj" />
+  </ItemGroup>
+
 </Project>

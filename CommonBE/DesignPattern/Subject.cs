@@ -1,11 +1,10 @@
-﻿using FoodBE.DesignPattern.Observer;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FoodBE.DesignPattern.Subject
+namespace CommonBE.DesignPattern
 {
     public abstract class Subject<T> where T : IObserver
     {

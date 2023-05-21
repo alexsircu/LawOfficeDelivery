@@ -8,10 +8,11 @@ namespace Client
 {
     internal class Program
     {
-        static double distance = 2.0; // 2 KM
+        static double distance = 2.0;
         static char input;
-        static Services foodServices;
+        static Services services;
         static FoodUI foodUI;
+        static TranslationUI translationUI;
         static Action<string, Order> feedback;
 
         static async Task Main(string[] args)
@@ -40,8 +41,8 @@ namespace Client
                 switch (inputNumber)
                 {
                     case 1:
-                        foodServices = new FoodServices();
-                        foodUI = new((FoodServices)foodServices, distance);
+                        services = new FoodServices();
+                        foodUI = new((FoodServices)services, distance);
                         feedback = foodUI.Notify;
                         foodUI.Start(ref input);
 
@@ -65,7 +66,6 @@ namespace Client
                                     break;
                                 case 'Q':
                                     return;
-                                    break;
                                 default:
                                     foodUI.ShowMenu(ref input);
                                     break;
@@ -74,9 +74,41 @@ namespace Client
 
                         } while (input != 'Q');
                         break;
-                    case 2:
-                        break;
 
+                    case 2:
+                        services = new TranslationServices();
+                        translationUI = new((TranslationServices)services, distance);
+                        feedback = translationUI.Notify;
+                        translationUI.Start(ref input);
+
+                        do
+                        {
+                            switch (input)
+                            {
+                                case 'B':
+                                    translationUI.ShowBasket(ref input);//
+                                    break;
+                                case 'R':
+                                    translationUI.ShowMenu(ref input);
+                                    break;
+                                case 'S':
+                                    translationUI.SendOrder(feedback); //   procedere con il lavoro quindi non aspettare nulla. 
+                                    input = 'E';
+                                    //Thread.Sleep(2000);
+                                    break;
+                                case 'E':
+                                    input = 'Q';
+                                    break;
+                                case 'Q':
+                                    return;
+                                default:
+                                    translationUI.ShowMenu(ref input);
+                                    break;
+                            }
+                            Console.ResetColor();
+
+                        } while (input != 'Q');
+                        break;
                 }
                 Console.ResetColor();
 

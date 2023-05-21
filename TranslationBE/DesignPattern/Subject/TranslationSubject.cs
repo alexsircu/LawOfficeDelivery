@@ -1,37 +1,37 @@
-﻿using FoodBE.DesignPattern.Observer;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using FoodBE.FoodProviders;
+using TranslationBE.TranslationProviders;
 using CommonBE.DesignPattern;
+using TranslationBE.DesignPattern.Observer;
 
-namespace FoodBE.DesignPattern.Subject
+namespace TranslationBE.DesignPattern.Subject
 {
-    public abstract class FoodSubject : Subject<FoodProvider>
+    public abstract class TranslationSubject : Subject<TranslationProvider>
     {
-        protected override List<FoodProvider> observers { get; set; }
+        protected override List<TranslationProvider> observers { get; set; }
 
         public void GetMenu()
         {
-            foreach (IFoodObserver o in observers)
+            foreach (ITranslationTextObserver o in observers)
             {
                 // - Quando viene richeisto il menu, Viene notificato a tutti gli Observers che fanno dei calcoli 
                 //    in base al numero di ordini e distanza risponderà il provider piu appropriato.
 
-                o.GetMenu();
+                o.GetOperators();
             }
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("-------------------------------------------------------------------------------");
             Console.WriteLine();
             Console.ResetColor();
         }
-        public FoodSubject(string Name) : base(Name)
+        public TranslationSubject(string Name) : base(Name)
         {
 
         }
-        public FoodSubject()
+        public TranslationSubject()
         {
 
         }

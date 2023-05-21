@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FoodBE.FoodProducts;
+using CommonBE.DesignPattern;
 
 namespace FoodBE.DesignPattern.Observer
 {
