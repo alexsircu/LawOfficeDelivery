@@ -14,6 +14,7 @@ namespace TranslationBE.TranslationProviders
     {
         internal Queue<Order> Orders = new();
         bool operatorIsWorking;
+        internal List<TranslationText> Menu;
 
 
         public async Task<OrderResponseTranslation> PlaceOrder(Basket basket)

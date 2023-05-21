@@ -5,6 +5,8 @@ using System.Data.Common;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FoodBE.FoodProducts;
+using TranslationBE.TranslationProducts;
 
 namespace Middleware
 {
@@ -21,6 +23,15 @@ namespace Middleware
         public void GetProvider(double distance)
         {
             TranslationProvider = ProviderFactory.CreateTranslationTextProvider(distance);
+        }
+
+        public void CreateProviderFactory(ref char input)
+        {
+            ProviderFactory = ServiceFactory.CreateProviderFactory(ref input);
+        }
+        public List<TranslationTextRequest> GetOperators()
+        {
+            return TranslationProvider.GetOperators();
         }
     }
 }
