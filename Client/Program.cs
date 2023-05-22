@@ -75,6 +75,11 @@ namespace Client
                         break;
 
                     case 2:
+                        Console.WriteLine("SERVICE UNAVAILABLE");
+                        Console.WriteLine("TYPE A CHAR TO RESTART");
+
+                        input = char.ToUpper(Console.ReadKey().KeyChar);
+
                         /*services = new TranslationServices();
                         translationUI = new((TranslationServices)services);
                         feedback = translationUI.Notify;
