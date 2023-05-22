@@ -14,14 +14,14 @@ namespace TranslationBE.TranslationFactories
     {
         public GermanProviderFactory() 
         {
-            string[] args = { "German1 ", "German2", "German3", "German4", "German5" };
+            /*string[] args = { "German1 ", "German2", "German3", "German4", "German5" };
             observers.Cast<GermanProvider>(); // Lista vuota  
             TranslationUtility.CreateTranslationProviders<GermanProvider>(this, args); // Fill observers list 
-            TranslationUtility.CreateFakeOrders(observers);
+            TranslationUtility.CreateFakeOrders(observers);*/
         }
-        public override ITranslationTextFactory CreateTranslationTextProvider(double Distance)
+        public override ITranslationTextProvider CreateTranslationTextProvider()
         {
-            GermanProvider germanProvider = observers.OrderByDescending(x => x.WaitingTime).First();
+            GermanProvider germanProvider = new GermanProvider();
             return germanProvider;
         }
     }

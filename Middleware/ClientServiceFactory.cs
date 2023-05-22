@@ -6,13 +6,13 @@ using System.Text;
 using System.Threading.Tasks;
 using FoodBE.DesignPattern.AbstractFactory;
 using FoodBE.FoodFactories;
-using TranslationBE.TranslationFactories;
+//using TranslationBE.TranslationFactories;
 
 namespace Middleware
 {
     public class ClientServicesFactory
     {
-        public static IAbstractServiceFactory CreateServiceFactory(ref char input)
+        public static IAbstractFoodServiceFactory CreateServiceFactory(ref char input)
         {
             if (input == 'Q') return null;
             var inputNumber = CharUnicodeInfo.GetDecimalDigitValue(input);
@@ -22,7 +22,8 @@ namespace Middleware
                 case 1:
                     return new AbstractFoodProviderFactory();
                 case 2:
-                    return new AbstractTranslationProviderFactory();
+                    //return new AbstractTranslationProviderFactory();
+                    return null;
                 default:
                     return null;
             }

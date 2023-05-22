@@ -7,16 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LawOfficeDelivery", "LawOff
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FoodBE", "FoodBE\FoodBE.csproj", "{7B7BE93F-A0C7-458E-9D8E-0E2CF934C49D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TranslationBE", "TranslationBE\TranslationBE.csproj", "{7FE05A0D-8E10-45A9-B764-8F49FBEBEF88}"
-	ProjectSection(ProjectDependencies) = postProject
-		{9AA48DD4-41C1-4FC7-8E80-56F7031D5D50} = {9AA48DD4-41C1-4FC7-8E80-56F7031D5D50}
-	EndProjectSection
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client", "Client\Client.csproj", "{D56AEFB4-1478-474B-A71C-DFBD55DDC7B0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Middleware", "Middleware\Middleware.csproj", "{401DF414-7B01-46B8-A48D-5868B82891D2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonBE", "CommonBE\CommonBE.csproj", "{9AA48DD4-41C1-4FC7-8E80-56F7031D5D50}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommonBE", "CommonBE\CommonBE.csproj", "{9AA48DD4-41C1-4FC7-8E80-56F7031D5D50}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,10 +25,6 @@ Global
 		{7B7BE93F-A0C7-458E-9D8E-0E2CF934C49D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B7BE93F-A0C7-458E-9D8E-0E2CF934C49D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7B7BE93F-A0C7-458E-9D8E-0E2CF934C49D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7FE05A0D-8E10-45A9-B764-8F49FBEBEF88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7FE05A0D-8E10-45A9-B764-8F49FBEBEF88}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7FE05A0D-8E10-45A9-B764-8F49FBEBEF88}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7FE05A0D-8E10-45A9-B764-8F49FBEBEF88}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D56AEFB4-1478-474B-A71C-DFBD55DDC7B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D56AEFB4-1478-474B-A71C-DFBD55DDC7B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D56AEFB4-1478-474B-A71C-DFBD55DDC7B0}.Release|Any CPU.ActiveCfg = Release|Any CPU

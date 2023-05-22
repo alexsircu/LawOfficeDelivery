@@ -12,10 +12,12 @@ namespace TranslationBE.TranslationProviders
 {
     public class TranslationProvider : BaseEntity, ITranslationTextProvider
     {
+        string name;
         internal Queue<Order> Orders = new();
         bool operatorIsWorking;
         internal List<TranslationText> Menu;
 
+        public string Name { get { return name; } }
 
         public async Task<OrderResponseTranslation> PlaceOrder(Basket basket)
         {
